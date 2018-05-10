@@ -7,5 +7,5 @@ cask 'pdfpen-9.2.3' do
   name 'PDFpen'
   homepage 'https://smilesoftware.com/pdfpen'
 
-  app 'PDFpen.app'
+  app 'PDFpen9.app'
 end
