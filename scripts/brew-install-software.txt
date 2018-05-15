@@ -43,6 +43,7 @@ brew cask install osxfuse # for NTFS disks
 brew install speedtest-cli
 brew cask install the-unarchiver
 # brew cask search timemachineeditor
+brew install mas # command line for Apple Store; OS X > 10.11; requires Xcode 9.0
 
 
 #
@@ -102,6 +103,7 @@ brew cask install inkscape
 brew cask install libreoffice
 brew cask install lyx
 brew cask install slack
+brew cask install kindle
 
 #
 # Multimedia
@@ -124,7 +126,7 @@ brew cask install default-folder-x
 brew cask install pdfpen
 
 # For OS X 10.11.  Didn't find an older version in official homebrew site.
-brew tab dgabbe/homebrew https://github.com/dgabbe/homebrew.git
+brew tap dgabbe/homebrew https://github.com/dgabbe/homebrew.git
 brew cask install pdfpen-9.2.3
 
 brew cask install vmware-fusion
