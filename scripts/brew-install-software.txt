@@ -10,6 +10,8 @@
 # brew related
 #
 brew analytics off # personal choice
+# brew install git-flow # figure out diff between this & git-flow-avh
+# brew install git-lfs # So Sourcetree can use all system binaries
 brew tap caskroom/cask # deal w/OS X binaries & /Application
 brew install brew-cask-completion
 brew tap buo/cask-upgrade # https://github.com/buo/homebrew-cask-upgrade
@@ -76,6 +78,7 @@ brew install pyenv
 brew cask install r-app # Alternative is “brew install homebrew/science/r”
 tag —add brew-installed /Applications/R.app
 brew cask install rstudio
+brew cask install tableau-public
 
 #
 # Web browsers
