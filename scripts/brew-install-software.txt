@@ -13,7 +13,6 @@ brew analytics off # personal choice
 # brew install git-flow # figure out diff between this & git-flow-avh
 # brew install git-lfs # So Sourcetree can use all system binaries
 brew tap caskroom/cask # deal w/OS X binaries & /Application
-brew install brew-cask-completion
 brew tap buo/cask-upgrade # https://github.com/buo/homebrew-cask-upgrade
 
 #
@@ -44,8 +43,9 @@ brew cask install yujitach-menumeters
 brew cask install osxfuse # for NTFS disks
 brew install speedtest-cli
 brew cask install the-unarchiver
+brew cask install ubiquiti-unifi-controller
 # brew cask search timemachineeditor
-brew install mas # command line for Apple Store; OS X > 10.11; requires Xcode 9.0
+# brew install mas # command line for Apple Store; OS X > 10.11; requires Xcode 9.0
 
 
 #
@@ -87,6 +87,7 @@ brew cask install brave
 brew cask install epic
 brew cask install firefox
 brew cask install google-chrome # needs password
+
 # brew cask install java
 
 #
@@ -102,7 +103,6 @@ brew install ooniprobe
 #
 brew cask install dropbox
 brew cask install evernote
-brew cask install inkscape
 brew cask install libreoffice
 brew cask install lyx
 brew cask install slack
@@ -113,11 +113,15 @@ brew cask install kindle
 #
 brew cask install handbrake
 brew tap caskroom/fonts
+brew cask install inkscape
+brew cask install gimp
+brew cask install scribus
 
 #
 # 3D Printing & CNC
 #
 brew cask install lulzbot-cura
+brew cask install sli3r
 # brew cask install sketchup
 
 #
@@ -127,6 +131,7 @@ brew cask install 1password
 brew cask install default-folder-x
 # For OS X 10.12 and higher:
 brew cask install pdfpen
+brew cask install beyond-compare
 
 # For OS X 10.11.  Didn't find an older version in official homebrew site.
 brew tap dgabbe/homebrew https://github.com/dgabbe/homebrew.git
@@ -151,10 +156,10 @@ microsoft-office-2011, cord, bbedit,
 diffmerge, mysqlworkbench, banktivity, adobe-air, balsamiq-mockups
 
 3rd batch of casks:
-lockdown, knockknock, ransomwhere, bash-git-prompt??, whatsyoursign, beyond-compare
+lockdown, knockknock, ransomwhere, bash-git-prompt??, whatsyoursign
 
 # Problems w/casks:
-# sandbox, sketchup, vuescan
+# sandbox
 
 # Screen sharing (a la Screenhero):
 # uberconfenence.com (use Chrome browser)
@@ -162,8 +167,6 @@ lockdown, knockknock, ransomwhere, bash-git-prompt??, whatsyoursign, beyond-comp
 
 # Test connection speed
 speedtest-cli --no-upload # just download speed
-
-check configuration of 1Password defaults: ws.agile.1Password, also look in prefs file.
 
 # Move iTunes backups to different location:
 ls -s <new location> ~/Library/Application\ Support/MobileSync/Backup
@@ -180,3 +183,8 @@ brew install Caskroom/cask/cask-name
 # From https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/
 # From https://apple.stackexchange.com/questions/127561/script-to-check-software-version
 # defaults read /Applications/TextEdit.app/Contents/Info.plist CFBundleShortVersionString
+
+================================================
+Python stuff:
+
+pip installs: (virtualevn, xattr, )
