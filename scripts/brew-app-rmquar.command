@@ -37,8 +37,9 @@ def rm_quar(app_file, app_root="/Applications/"):
         # Same as error 13
         # Some apps get installed w/the owner as root and others w/the login account
         # or script is run from non-admin account.
-        if pwd.getpwnam(os.getlogin()).pw_uid != os.stat(f)[stat.ST_UID]:
-            print("    Not owned by you: Skipping {}".format(f))
+        owner_uid = os.stat(f)[stat.ST_UID]
+        if pwd.getpwnam(os.getlogin()).pw_uid != owner_uid:
+            print("    Owned by {}: Skipping {}".format(pwd.getpwuid(owner_uid)[0], f))
     except OSError as e:
         if e.errno != 93:
             print("    Unexpected: {}.format(e)")
