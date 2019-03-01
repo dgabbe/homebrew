@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 #
 # Remove the quarantine extended file attribute so brew installed apps will open w/out
-# the confirming dialog box.  Assumes running on MacOS.
+# the confirming dialog box.
 #
 # https://stackoverflow.com/questions/15304934/how-to-get-the-list-of-error-numbers-errno-for-an-exception-type-in-python
 # https://gist.github.com/roskakori/4572921 - errno.errorcode.keys()
@@ -14,11 +14,13 @@ import pwd
 import subprocess
 import shlex
 import stat
+from sys import exit
 
 try:
     import xattr
 except ImportError as e:
     print("  {} was not found. Might want to 'pip install {}'".format(e.name, e.name))
+    exit(1)
 
 
 def rm_quar(app_file, app_root="/Applications/"):
@@ -65,6 +67,8 @@ def main():
             )
         )
 
+# think about changing to current directory of script.  Little point to littering ~/.
+# figure out how to handle app names w/spaces in them.
     mapping_file = os.path.join(os.environ["HOME"], ".cask_to_app_mapping")
     if os.path.isfile(mapping_file):
         try:
