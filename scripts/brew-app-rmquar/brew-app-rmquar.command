@@ -5,14 +5,21 @@
 #
 # https://stackoverflow.com/questions/15304934/how-to-get-the-list-of-error-numbers-errno-for-an-exception-type-in-python
 # https://gist.github.com/roskakori/4572921 - errno.errorcode.keys()
+#
+# Build as an exe:
+#   python3 -m nuitka --follow-imports --show-progress --python-flag=no_site --remove-output brew-app-rmquar.command --standalone
+#
+# May need to use  --file-reference-choice=FILE_REFERENCE_MODE
+#
 
 
-import grp
+from grp import getgrnam
 import json
-import os.path
-import pwd
-import subprocess
-import shlex
+from os import getlogin, stat
+from os.path import abspath, dirname, exists, isfile, join
+from pwd import getpwnam, getpwuid
+from subprocess import run
+from shlex import shlex
 import stat
 from sys import exit
 
@@ -39,9 +46,9 @@ def rm_quar(app_file, app_root="/Applications/"):
         # Same as error 13
         # Some apps get installed w/the owner as root and others w/the login account
         # or script is run from non-admin account.
-        owner_uid = os.stat(f)[stat.ST_UID]
-        if pwd.getpwnam(os.getlogin()).pw_uid != owner_uid:
-            print("    Owned by {}: Skipping {}".format(pwd.getpwuid(owner_uid)[0], f))
+        owner_uid = stat(f)[stat.ST_UID]
+        if getpwnam(getlogin()).pw_uid != owner_uid:
+            print("    Owned by {}: Skipping {}".format(getpwuid(owner_uid)[0], f))
     except OSError as e:
         if e.errno != 93:
             print("    Unexpected: {}.format(e)")
@@ -54,7 +61,7 @@ def is_admin():
 
     :return: boolean
     """
-    return os.getlogin() in grp.getgrnam("admin").gr_mem
+    return getlogin() in getgrnam("admin").gr_mem
 
 
 def main():
@@ -63,18 +70,17 @@ def main():
         # sys.exit("** Need admin privs to run **")
         print(
             "**** {} is not an admin.  Quarantine setting will not be removed ****".format(
-                os.getlogin()
+                getlogin()
             )
         )
 
-# think about changing to current directory of script.  Little point to littering ~/.
-# figure out how to handle app names w/spaces in them.
-    mapping_file = os.path.join(os.environ["HOME"], ".cask_to_app_mapping")
-    if os.path.isfile(mapping_file):
+    # think about changing to current directory of script.  Little point to littering ~/.
+    # figure out how to handle app names w/spaces in them.
+    mapping_file = join(dirname(abspath(__file__)), "cask_to_app_mapping.json")
+    print("....Should use {}".format(mapping_file))
+    if isfile(mapping_file):
         try:
-            file = open(
-                mapping_file, "r"
-            )  # read existing mapping file, ~/.cask_mapping.json
+            file = open(mapping_file, "r")  # read existing mapping file,
             cask_mapping = json.load(file)
         except Exception:
             cask_mapping = {}
@@ -84,8 +90,8 @@ def main():
         cask_mapping = {}
 
     cmd = "brew cask list"
-    installed_casks = subprocess.run(
-        shlex.shlex(cmd), capture_output=True, universal_newlines=True
+    installed_casks = run(
+        shlex(cmd), capture_output=True, universal_newlines=True
     ).stdout.splitlines()
     atypical_casks = ["adobe-air", "java8"]
     new_mapping = {}
@@ -94,7 +100,7 @@ def main():
             rm_quar(cask_mapping[cask])
         elif cask not in atypical_casks:
             app_file = input("Please enter file name for {}: ".format(cask))
-            if os.path.exists(os.path.join("/Applications", app_file)):
+            if exists(join("/Applications", app_file)):
                 new_mapping[cask] = app_file
                 rm_quar(app_file)
             else:
