@@ -20,7 +20,7 @@ from os.path import abspath, dirname, exists, isfile, join
 from pwd import getpwnam, getpwuid
 from subprocess import run
 from shlex import shlex
-import stat
+from stat import ST_UID
 from sys import exit
 
 try:
@@ -109,7 +109,7 @@ def main():
     if new_mapping:
         try:
             file = open(mapping_file, "w")
-            json.dump({**cask_mapping, **new_mapping}, file, indent=4)
+            dump({**cask_mapping, **new_mapping}, file, indent=4)
         finally:
             file.close()
             print("  Updated {}".format(file.name))

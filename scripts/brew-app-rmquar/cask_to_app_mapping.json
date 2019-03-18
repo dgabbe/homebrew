@@ -53,5 +53,6 @@
     "vlc": "VLC.app",
     "vmware-fusion": "VMware Fusion.app",
     "vmware-fusion10": "VMware Fusion.app",
-    "xquartz": "Utilities/XQuartz.app"
+    "xquartz": "Utilities/XQuartz.app",
+    "mactex": "TeX/TeXShop.app"
 }
