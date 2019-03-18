@@ -7,7 +7,7 @@
 # https://gist.github.com/roskakori/4572921 - errno.errorcode.keys()
 #
 # Build as an exe:
-#   python3 -m nuitka --follow-imports --show-progress --python-flag=no_site --remove-output brew-app-rmquar.command --standalone
+#   python3 -m nuitka --follow-imports --show-progress --python-flag=no_site --remove-output brew-app-rmquar.py --standalone
 #
 # May need to use  --file-reference-choice=FILE_REFERENCE_MODE
 #
@@ -74,10 +74,9 @@ def main():
             )
         )
 
-    # think about changing to current directory of script.  Little point to littering ~/.
-    # figure out how to handle app names w/spaces in them.
+    # figure out how to handle app names w/spaces in them. Garmin Express isn't being processed...
     mapping_file = join(dirname(abspath(__file__)), "cask_to_app_mapping.json")
-    print("....Should use {}".format(mapping_file))
+    print("....Mapping file: {}".format(mapping_file))
     if isfile(mapping_file):
         try:
             file = open(mapping_file, "r")  # read existing mapping file,
