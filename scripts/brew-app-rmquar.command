@@ -67,6 +67,7 @@ def main():
             )
         )
 
+# os.path.dirname(os.path.abspath(sys.argv[0])) add to call from directory script lives in!
     mapping_file = abspath("cask_to_app_mapping.json")
     if isfile(mapping_file):
         try:
