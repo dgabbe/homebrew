@@ -5,11 +5,18 @@
 #
 # https://stackoverflow.com/questions/15304934/how-to-get-the-list-of-error-numbers-errno-for-an-exception-type-in-python
 # https://gist.github.com/roskakori/4572921 - errno.errorcode.keys()
+#
+# Build as an exe:
+#   python3 -m nuitka --follow-imports --show-progress --python-flag=no_site --remove-output brew-app-rmquar.py --standalone
+#
+# May need to use  --file-reference-choice=FILE_REFERENCE_MODE
+#
+
 
 from grp import getgrnam
-from json import load, dump
-from os.path import exists, isfile, abspath, join
+import json
 from os import getlogin, stat
+from os.path import abspath, dirname, exists, isfile, join
 from pwd import getpwnam, getpwuid
 from subprocess import run
 from shlex import shlex
@@ -39,7 +46,7 @@ def rm_quar(app_file, app_root="/Applications/"):
         # Same as error 13
         # Some apps get installed w/the owner as root and others w/the login account
         # or script is run from non-admin account.
-        owner_uid = stat(f)[ST_UID]
+        owner_uid = stat(f)[stat.ST_UID]
         if getpwnam(getlogin()).pw_uid != owner_uid:
             print("    Owned by {}: Skipping {}".format(getpwuid(owner_uid)[0], f))
     except OSError as e:
@@ -67,14 +74,20 @@ def main():
             )
         )
 
+<<<<<<< HEAD:scripts/brew-app-rmquar.command
 # os.path.dirname(os.path.abspath(sys.argv[0])) add to call from directory script lives in!
     mapping_file = abspath("cask_to_app_mapping.json")
+||||||| merged common ancestors:scripts/brew-app-rmquar.command
+    mapping_file = abspath("cask_to_app_mapping.json")
+=======
+    # figure out how to handle app names w/spaces in them. Garmin Express isn't being processed...
+    mapping_file = join(dirname(abspath(__file__)), "cask_to_app_mapping.json")
+    print("....Mapping file: {}".format(mapping_file))
+>>>>>>> 8c27efc38c0d0453e5166918214b5696a877c86c:scripts/brew-app-rmquar/brew-app-rmquar.py
     if isfile(mapping_file):
         try:
-            file = open(
-                mapping_file, "r"
-            )  # read existing mapping file, ~/.cask_mapping.json
-            cask_mapping = load(file)
+            file = open(mapping_file, "r")  # read existing mapping file,
+            cask_mapping = json.load(file)
         except Exception:
             cask_mapping = {}
         finally:
