@@ -12,6 +12,15 @@
 # May need to use  --file-reference-choice=FILE_REFERENCE_MODE
 #
 
+# figure out which PyCharm prefs to store in Git
+# - https://www.jetbrains.com/help/pycharm/project-and-ide-settings.html
+# - https://www.jetbrains.com/help/pycharm/sharing-your-ide-settings.html
+#
+# - Update base plugin from admin account
+# Deal with ST_UID not associated w/import statement
+# gAdmin reports as not an Admin - why?
+# Files w/spaces not properly handled - 'Garmin Express'
+#
 
 from grp import getgrnam
 from json import dump, load
