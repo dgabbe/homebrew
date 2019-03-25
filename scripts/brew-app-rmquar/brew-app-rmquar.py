@@ -74,9 +74,16 @@ def main():
             )
         )
 
+<<<<<<< HEAD:scripts/brew-app-rmquar.command
+# os.path.dirname(os.path.abspath(sys.argv[0])) add to call from directory script lives in!
+    mapping_file = abspath("cask_to_app_mapping.json")
+||||||| merged common ancestors:scripts/brew-app-rmquar.command
+    mapping_file = abspath("cask_to_app_mapping.json")
+=======
     # figure out how to handle app names w/spaces in them. Garmin Express isn't being processed...
     mapping_file = join(dirname(abspath(__file__)), "cask_to_app_mapping.json")
     print("....Mapping file: {}".format(mapping_file))
+>>>>>>> 8c27efc38c0d0453e5166918214b5696a877c86c:scripts/brew-app-rmquar/brew-app-rmquar.py
     if isfile(mapping_file):
         try:
             file = open(mapping_file, "r")  # read existing mapping file,
