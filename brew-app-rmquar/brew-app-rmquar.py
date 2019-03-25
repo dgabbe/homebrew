@@ -15,6 +15,7 @@
 # figure out which PyCharm prefs to store in Git
 # - https://www.jetbrains.com/help/pycharm/project-and-ide-settings.html
 # - https://www.jetbrains.com/help/pycharm/sharing-your-ide-settings.html
+# - https://stackoverflow.com/questions/9237345/how-do-i-ignore-pycharm-configuration-files-in-a-git-repository
 #
 # - Update base plugin from admin account
 # Deal with ST_UID not associated w/import statement
