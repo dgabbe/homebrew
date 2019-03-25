@@ -101,3 +101,4 @@ ENV/
 .mypy_cache/
 dbnavigator.xml
 scripts/brew-app-rmquar/brew-app-rmquar.dist
+brew-app-rmquar/brew-app-rmquar.dist
