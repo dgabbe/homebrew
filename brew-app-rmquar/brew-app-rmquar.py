@@ -86,7 +86,8 @@ def main():
     print("....Mapping file: {}".format(mapping_file))
     if isfile(mapping_file):
         try:
-            file = open(mapping_file, "r")  # read existing mapping file,
+            # read existing mapping file
+            file = open(mapping_file, "r")
             cask_mapping = load(file)
         except Exception:
             cask_mapping = {}
