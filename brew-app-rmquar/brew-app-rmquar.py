@@ -45,7 +45,7 @@ def rm_quar(app_file, app_root="/Applications/"):
     #   OSError: [Errno 93] Attribute not found:
     #   PermissionError: [Errno 13] Permission denied:
     quar_attr = "com.apple.quarantine"
-    f = app_root + app_file
+    f = app_root + app_file.replace(' ', '\\ ')
     try:
         xattr.xattr(f).remove(quar_attr)
     except FileNotFoundError:
@@ -81,7 +81,6 @@ def main():
             )
         )
 
-    # figure out how to handle app names w/spaces in them. Garmin Express isn't being processed...
     mapping_file = join(dirname(abspath(__file__)), "cask_to_app_mapping.json")
     print("....Mapping file: {}".format(mapping_file))
     if isfile(mapping_file):
